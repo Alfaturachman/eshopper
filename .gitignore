@@ -1,0 +1,41 @@
+.DS_Store
+
+application/cache/*
+!application/cache/index.html
+
+application/logs/*
+!application/logs/index.html
+
+!application/*/.htaccess
+
+composer.lock
+
+user_guide_src/build/*
+user_guide_src/cilexer/build/*
+user_guide_src/cilexer/dist/*
+user_guide_src/cilexer/pycilexer.egg-info/*
+/vendor/
+
+# Artefak sensitif / lokal
+#-------------------------
+# Dump database berisi PII + kredensial (jangan pernah di-commit)
+*.sql
+# Kredensial database lokal (buat template terpisah bila perlu)
+application/config/database.php
+# Upload aset
+uploads/*
+!uploads/index.html
+
+# IDE Files
+#-------------------------
+/nbproject/
+.idea/*
+
+## Sublime Text cache files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+/tests/tests/
+/tests/results/

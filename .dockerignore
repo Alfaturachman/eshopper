@@ -1,0 +1,12 @@
+.git
+.gitignore
+.editorconfig
+.phpunit.cache
+tests/
+docs/
+user_guide/
+ecommerce_codeigniter (1).sql
+AUDIT_ESHOPPER.md
+contributing.md
+readme.rst
+*.log

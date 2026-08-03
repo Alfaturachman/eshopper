@@ -1,0 +1,54 @@
+name: CI/CD Pipeline - E-Shopper
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test:
+    name: Run PHPUnit Tests & Quality Checks
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: rootpassword
+          MYSQL_DATABASE: eshopper
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP Environment
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli, pdo_mysql, gd, zip, mbstring
+          coverage: none
+
+      - name: Install Dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run PHP Syntax Check (Lint)
+        run: find application system -name "*.php" -exec php -l {} \; | grep -v "No syntax errors detected" || true
+
+      - name: Execute Automated Tests (PHPUnit 10)
+        run: vendor/bin/phpunit
+
+  docker-build:
+    name: Verify Docker Container Build
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t eshopper:latest .
