@@ -18,7 +18,8 @@ RUN a2enmod rewrite
 COPY . /var/www/html/
 
 # Set Proper Permissions for Uploads and Logs
-RUN chown -R www-data:www-data /var/www/html/uploads /var/www/html/application/logs \
+RUN mkdir -p /var/www/html/uploads /var/www/html/application/logs \
+    && chown -R www-data:www-data /var/www/html/uploads /var/www/html/application/logs \
     && chmod -R 775 /var/www/html/uploads /var/www/html/application/logs
 
 # Expose HTTP Port
