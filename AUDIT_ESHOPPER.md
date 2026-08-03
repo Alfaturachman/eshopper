@@ -61,8 +61,8 @@
 - `composer.json` dependency palsu `other/dependency`; tanpa `composer.lock` — DIBAIKI
 - **Ketiadaan Test Coverage (Unit & Feature Test)** (`tests/`) — DIBAIKI (12 tests, 26 assertions 100% PASS via PHPUnit 10)
 - jQuery 1.10.2 / Bootstrap tua; asset tanpa versioning — Fase 3
-- Bukan git repo — manual (buat repo + commit)
-- `.gitignore` kini menutup `*.sql`, `application/config/database.php`, `uploads/*`
+- Bukan git repo — DIBAIKI (Inisialisasi Git & di-push ke GitHub Alfaturachman/eshopper)
+- Terintegrasi Docker, CI/CD Pipeline & 13 Dokumentasi — DIBAIKI (`Dockerfile`, `docker-compose.yml`, `.github/workflows/ci-cd.yml`, `docs/`)
 
 ---
 
@@ -95,7 +95,7 @@
 
 - [x] Hapus `ecommerce_codeigniter (1).sql` dari repo / pastikan ter-ignore → **dilakukan** (`*.sql` di `.gitignore`)
 - [x] Buat `.gitignore` yang benar → **dilakukan**
-- [ ] Inisialisasi git repo + commit awal (folder saat ini bukan repo)
+- [x] Inisialisasi git repo + commit awal + push ke GitHub `Alfaturachman/eshopper` → **dilakukan**
 - [ ] **Ganti password MySQL** (saat ini root = kosong) + update `application/config/database.php`
 - [ ] **Reset password semua user `tbl_user`** (terutama `csesumonpro`, `abir`, `Author`) — saat ini masih `admin`
 - [ ] Reset password pelanggan `tbl_customer` (hash MD5 lama) — *migrasi otomatis ke bcrypt saat login sudah dibuat*; tetap perlu mekanisme lupa-password
@@ -139,6 +139,11 @@
 | `application/controllers/Contact.php` (F3) | Menambahkan method `send_reply()` untuk memproses balasan email/pesan kontak dengan validasi |
 | `composer.json` (F3) | Menghapus dependency palsu `"other/dependency": "^1.2.3"` dari `require-dev` |
 | DB `eshopper` (F3) | Seluruh 11 tabel MySQL di-alter ke `ENGINE=InnoDB` agar mendukung ACID Transactions & row-level locking |
+| `tests/` (F3) | Membuat suite pengujian PHPUnit 10 (12 test cases unit & feature, 26 assertions, 100% PASS) |
+| `Dockerfile` & `docker-compose.yml` (F3) | Menyiapkan kontainerisasi PHP 8.3 Apache & MySQL 8.0 (InnoDB) |
+| `.github/workflows/ci-cd.yml` (F3) | Otomatisasi GitHub Actions CI/CD pipeline untuk linting, PHPUnit 10, & Docker build verification |
+| `docs/` (F3) | Membuat 13 berkas dokumentasi teknis, arsitektur, database, API, testing, deployment, & keamanan |
+| Git Repository (F3) | Inisialisasi repo lokal, commit awal, & publishing ke `https://github.com/Alfaturachman/eshopper` |
 
 ### Verifikasi (smoke test via PHP built-in server + MySQL 8.0.30)
 - Homepage, paginasi produk (`/products`), detail produk valid → HTTP 200, tanpa error
